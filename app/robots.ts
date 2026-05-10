@@ -2,8 +2,12 @@ import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/api/"] },
-    sitemap: "https://leadwithnadine.com/sitemap.xml",
-    host: "https://leadwithnadine.com",
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/api/"]
+    },
+    sitemap: "https://getstratiq.co/sitemap.xml",
+    host: "https://getstratiq.co"
   };
 }

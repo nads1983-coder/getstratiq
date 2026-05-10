@@ -1,51 +1,79 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://leadwithnadine.com"),
+  metadataBase: new URL("https://getstratiq.co"),
   title: {
-    default: "LeadWithNadine | Communication Clarity for Frontline Leaders",
-    template: "%s | LeadWithNadine",
+    default: "STRATIQ | Free AI Strategic Reasoning Tool",
+    template: "%s | STRATIQ"
   },
   description:
-    "LeadWithNadine is Nadine Pierre's communication clarity platform for frontline leaders who want to stop overexplaining, handle difficult conversations, and lead with calm authority.",
-  alternates: { canonical: "/" },
+    "Free AI strategic reasoning tool for clearer decisions, risk assessment, option comparison, and communication under pressure.",
   keywords: [
-    "LeadWithNadine", "Lead With Nadine", "Nadine Pierre", "communication clarity platform", "communication intelligence",
-    "communication clarity", "frontline leadership communication", "calm authority leadership", "security leadership",
-    "difficult conversations leadership", "stop overexplaining", "leadership communication", "confident communication for leaders",
+    "STRATIQ",
+    "free AI strategic reasoning tool",
+    "AI strategic reasoning",
+    "AI decision-making tool",
+    "risk assessment AI",
+    "option comparison AI",
+    "decision clarity",
+    "strategic judgement",
+    "communication under pressure",
+    "professional reasoning",
+    "clearer decisions"
   ],
-  authors: [{ name: "Nadine Pierre", url: "https://leadwithnadine.com" }],
-  creator: "Nadine Pierre",
-  publisher: "LeadWithNadine",
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
-    title: "LeadWithNadine | Communication Clarity for Frontline Leaders",
-    description: "Stop overexplaining. Rewrite with clarity. Lead with calm authority under real-world pressure.",
-    url: "https://leadwithnadine.com",
-    siteName: "LeadWithNadine",
+    title: "STRATIQ | Free AI Strategic Reasoning Tool",
+    description:
+      "Free AI strategic reasoning for clearer decisions, risk assessment, option comparison, and communication under pressure.",
+    url: "https://getstratiq.co",
+    siteName: "STRATIQ",
     type: "website",
     locale: "en_GB",
-    images: [{ url: "/stop-overexplaining-guide-cover.jpg", width: 768, height: 1152, alt: "LeadWithNadine Stop Overexplaining leadership guide" }],
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "STRATIQ free AI strategic reasoning tool"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "LeadWithNadine | Communication Clarity for Frontline Leaders",
-    description: "Communication clarity for frontline leaders who want to stop overexplaining and lead with calm authority.",
-    images: ["/stop-overexplaining-guide-cover.jpg"],
+    title: "STRATIQ | Free AI Strategic Reasoning Tool",
+    description:
+      "Analyse decisions, risks, options, trade-offs, and communication with calm strategic clarity.",
+    images: ["/og-image.svg"]
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/apple-touch-icon.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }]
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
-  },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1
+    }
+  }
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ffffff" };
-
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en-GB"><body>{children}</body></html>;
+  return (
+    <html lang="en-GB">
+      <body>{children}</body>
+    </html>
+  );
 }
