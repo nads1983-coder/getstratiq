@@ -154,7 +154,7 @@ h1 { margin: 0; max-width: 780px; font-size: clamp(2.3rem, 5vw, 5.4rem); line-he
 @media (max-width: 860px) {
   .app-shell { display: block; } .sidebar { display: none; } .workspace { padding: 10px; }
   .topbar { position: sticky; top: 8px; z-index: 10; border-radius: 16px; }
-  .mobile-brand { display: flex; } .mobile-brand .brand-mark { width: 36px; height: 36px; border-radius: 10px; } .mobile-brand span { font-size: 0.96rem; }
+  .mobile-brand { display: flex; } .mobile-brand .brand-mark { width: 36px; height: 36px; border-radius: 10px; font-size: 0.95rem; line-height: 1; letter-spacing: 0; } .mobile-brand span { font-size: 0.96rem; }
   .topbar-copy { display: none; } .topbar-support { min-width: 84px; min-height: 38px; font-size: 0.82rem; }
   .workspace-grid { gap: 12px; margin-top: 12px; } .command-panel, .brief-panel { border-radius: 18px; padding: 16px; }
   .panel-heading, .brief-header { align-items: flex-start; } .system-status { display: none; }
