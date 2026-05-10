@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="STRATIQ">
+  <rect width="1200" height="630" fill="#fbfafc"/>
+  <rect x="70" y="70" width="1060" height="490" rx="18" fill="#ffffff" stroke="#e9e5ee"/>
+  <text x="120" y="205" fill="#4B1F6F" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="8">STRATIQ</text>
+  <text x="120" y="315" fill="#19151F" font-family="Georgia, serif" font-size="76" font-weight="700">Think clearly</text>
+  <text x="120" y="405" fill="#19151F" font-family="Georgia, serif" font-size="76" font-weight="700">under pressure.</text>
+  <line x1="120" y1="455" x2="210" y2="455" stroke="#D4AF37" stroke-width="6"/>
+  <text x="120" y="505" fill="#625A6B" font-family="Arial, sans-serif" font-size="26">Free AI strategic reasoning for better judgement.</text>
+</svg>
