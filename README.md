@@ -1,47 +1,50 @@
-# STRATIQ
+# LeadWithNadine
 
-STRATIQ is a free AI strategic reasoning tool for professionals who need clearer judgement under pressure.
+Premium Next.js communication clarity platform for LeadWithNadine.com.
 
-It is calm, analytical, practical, and direct. It is not a therapy bot, motivational product, generic chatbot, or productivity guru platform.
+## Local Setup
 
-## Stack
+Install dependencies:
 
-- Next.js App Router
-- React
-- TypeScript
-- Tailwind CSS
-- Server-side OpenAI API route
+```bash
+npm install
+```
 
-## Environment Variables
+Create your local environment file:
 
-Set these in Vercel Project Settings for the `getstratiq` project:
+```bash
+npm run setup-env
+```
+
+Then paste your OpenAI API key when prompted. The script writes the key to `.env.local` and does not print it back.
+
+You can also edit `.env.local` directly. Paste your OpenAI API key into `.env.local` after `OPENAI_API_KEY=`:
 
 ```text
-OPENAI_API_KEY=
+OPENAI_API_KEY=paste_your_openai_api_key_here
 OPENAI_MODEL=gpt-5
 ```
 
-The OpenAI API key must never be placed in client-side code.
+## Security
+
+The OpenAI API key is read only by the server-side `/api/clarity` route.
+
+Never place the key in:
+
+- React components
+- Client-side code
+- Public environment variables beginning with `NEXT_PUBLIC_`
+- Committed files
+
+`.env.local` and `.env` are ignored by git.
 
 ## Deployment
 
-Deploy this repository only to the Vercel project named `getstratiq`.
+Deploy this project to the Vercel project named `lead-with-nadine` only. Do not attach `leadwithnadine.com` to STRATIQ or any `getstratiq` project.
 
-Production domains:
+Set these environment variables in Vercel Project Settings:
 
 ```text
-getstratiq.co
-www.getstratiq.co
-```
-
-Build command:
-
-```bash
-npm run build
-```
-
-The build script runs:
-
-```bash
-next build --webpack
+OPENAI_API_KEY
+OPENAI_MODEL
 ```

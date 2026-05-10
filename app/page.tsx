@@ -1,186 +1,74 @@
-"use client";
+import { ClarityTool } from "./components/ClarityTool";
+import { ConvertKitEmbed } from "./components/ConvertKitEmbed";
+import { ProtectedGuideImage } from "./components/ProtectedGuideImage";
+import { ArrowRight, Compass, Frame, Message, Pattern, Scale, Shield, Target } from "./components/Icons";
 
-import { FormEvent, useState } from "react";
-
-const principles = [
-  ["Interpret the pressure", "Separate facts, assumptions, incentives, and hidden risks."],
-  ["Compare options", "See the trade-offs before committing to a move."],
-  ["Communicate clearly", "Turn ambiguity into practical wording and next steps."]
-];
-
-const examples = [
-  "A difficult conversation with a team member is becoming tense.",
-  "I need to decide whether to escalate a client issue.",
-  "A stakeholder is pushing for speed, but the risk feels unclear."
-];
+const donateUrl = "https://donate.stripe.com/7sYbJ1gFw7wbe9y65p33W04";
+const bookUrl = "https://amzn.eu/d/00txB2XH";
+const navItems = [["About", "#about"], ["Clarity Tool", "#clarity-tool"], ["Guide", "#free-guide"], ["Insights", "#insights"], ["Donate", donateUrl]];
+const proof = [["Former Police Officer", "12+ years of service shaped by pressure, judgement, and accountability."], ["Operational leadership", "Current Security Supervisor / Security Manager on Duty in real-world environments."], ["Communication discipline", "Practical guidance for difficult conversations, emotional control, and clear standards."]];
+const pillars = [["Rewrite With Clarity", "Turn softened, defensive, or overexplained messages into calm leadership communication."], ["Pressure-Test The Message", "Check whether your wording sounds clear, accountable, and steady under pressure."], ["Build Communication Discipline", "Practise language that creates standards without sounding aggressive."]];
+const insights = [["The Overexplaining Trap", "Overexplaining often feels polite. In leadership, it can make the standard sound optional."], ["Calm Is A Skill", "Authority is not volume. It is the ability to stay steady while saying what needs to be said."], ["Difficult Conversations", "A clear conversation early usually prevents a heavier conversation later."]];
+const ecosystem = [["Newsletter", "Practical guidance and the Stop Overexplaining guide."], ["Message clarity", "Message refinement built around calm authority."], ["Social content", "LinkedIn authority, YouTube lessons, and short-form clarity themes working together."]];
 
 export default function Home() {
-  const [situation, setSituation] = useState("");
-  const [result, setResult] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const schema = { "@context": "https://schema.org", "@graph": [
+    { "@type": "Person", "@id": "https://leadwithnadine.com/#nadine-pierre", name: "Nadine Pierre", url: "https://leadwithnadine.com", brand: { "@id": "https://leadwithnadine.com/#organization" }, jobTitle: "Security Supervisor / Security Manager on Duty", description: "Nadine Pierre helps frontline leaders stop overexplaining and communicate with calm authority.", knowsAbout: ["frontline leadership", "communication clarity", "calm authority", "difficult conversations", "security leadership", "leadership communication"] },
+    { "@type": "Organization", "@id": "https://leadwithnadine.com/#organization", name: "LeadWithNadine", url: "https://leadwithnadine.com", founder: { "@id": "https://leadwithnadine.com/#nadine-pierre" }, description: "Premium communication clarity platform for frontline leaders who want to stop overexplaining and lead with calm authority." },
+    { "@type": "WebSite", "@id": "https://leadwithnadine.com/#website", name: "LeadWithNadine", url: "https://leadwithnadine.com", publisher: { "@id": "https://leadwithnadine.com/#organization" }, inLanguage: "en-GB" },
+    { "@type": "SoftwareApplication", "@id": "https://leadwithnadine.com/#stop-overexplaining-tool", name: "Stop Overexplaining Tool", applicationCategory: "BusinessApplication", operatingSystem: "Web", provider: { "@id": "https://leadwithnadine.com/#organization" }, description: "Communication rewrite tool that helps frontline leaders refine overexplained messages into clear, calm, authoritative communication." },
+  ]};
 
-  async function analyse(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
-    setError("");
-    setResult("");
+  return <main>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-    try {
-      const response = await fetch("/api/stratiq", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ situation })
-      });
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-white/95 backdrop-blur-xl">
+      <div className="section-shell flex min-h-14 items-center justify-between gap-3 sm:min-h-16">
+        <a href="#top" className="flex min-w-0 items-center gap-3" aria-label="LeadWithNadine home">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-gold/70 text-plum sm:h-10 sm:w-10"><Shield className="h-5 w-5" /></span>
+          <span className="min-w-0 leading-none"><span className="block text-[10px] font-bold uppercase tracking-[0.22em] text-plum sm:text-[11px]">LeadWith</span><span className="serif block text-[1.55rem] font-semibold text-plum sm:text-2xl">Nadine</span></span>
+        </a>
+        <nav className="hidden items-center gap-7 text-sm font-semibold text-[#4c4357] lg:flex" aria-label="Primary navigation">{navItems.map(([label, href]) => <a key={label} href={href} className="transition hover:text-plum" target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>{label}</a>)}</nav>
+        <a href="#free-guide" className="focus-ring inline-flex min-h-10 items-center rounded-md bg-plum px-4 text-sm font-bold text-white transition hover:bg-[#3d185e] sm:px-5">Start Here</a>
+      </div>
+    </header>
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "STRATIQ could not analyse this yet.");
-      }
-
-      setResult(data.result);
-    } catch (caught) {
-      setError(caught instanceof Error ? caught.message : "Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <main>
-      <header className="border-b border-line bg-white/90 backdrop-blur">
-        <div className="section-shell flex min-h-16 items-center justify-between">
-          <a href="#top" className="flex items-center gap-3" aria-label="STRATIQ home">
-            <span className="grid h-10 w-10 place-items-center rounded-md border border-gold/60 text-plum">
-              S
-            </span>
-            <span className="serif text-2xl font-semibold text-plum">STRATIQ</span>
-          </a>
-          <nav className="hidden items-center gap-7 text-sm font-semibold text-muted md:flex">
-            <a href="#tool" className="hover:text-plum">Use STRATIQ</a>
-            <a href="#method" className="hover:text-plum">Method</a>
-            <a href="#support" className="hover:text-plum">Support</a>
-          </nav>
-        </div>
-      </header>
-
-      <section id="top" className="section-shell grid gap-10 py-12 md:grid-cols-[1.05fr_0.95fr] md:py-20">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-plum">
-            Free AI strategic reasoning
-          </p>
-          <h1 className="serif mt-5 max-w-3xl text-5xl font-semibold leading-[0.98] text-ink md:text-7xl">
-            Think clearly under pressure.
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-muted">
-            STRATIQ helps you analyse situations, assess risk, compare options, and choose cleaner wording before the pressure makes the decision for you.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#tool" className="focus-ring inline-flex min-h-12 items-center justify-center rounded-md bg-plum px-7 text-sm font-bold text-white shadow-soft transition hover:bg-[#3d185e]">
-              Use STRATIQ
-            </a>
-            <a href="#method" className="focus-ring inline-flex min-h-12 items-center justify-center rounded-md border border-gold px-7 text-sm font-bold text-plum transition hover:bg-gold/10">
-              See the method
-            </a>
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-line bg-white p-5 shadow-soft">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-plum">Reasoning brief</p>
-          <div className="mt-5 grid gap-3">
-            {["Situation summary", "Strategic interpretation", "Options", "Risk assessment", "Recommended move"].map((item, index) => (
-              <div key={item} className="rounded-md border border-line bg-panel p-4">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-white text-sm font-bold text-plum shadow-edge">
-                    {index + 1}
-                  </span>
-                  <p className="font-bold text-ink">{item}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="method" className="section-shell py-10">
-        <div className="grid gap-4 md:grid-cols-3">
-          {principles.map(([title, text]) => (
-            <article key={title} className="rounded-lg border border-line bg-white p-6 shadow-edge">
-              <h2 className="text-xl font-bold text-ink">{title}</h2>
-              <p className="mt-3 leading-7 text-muted">{text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="tool" className="section-shell py-12 md:py-20">
-        <div className="grid gap-6 rounded-lg border border-line bg-white p-5 shadow-soft md:grid-cols-[0.8fr_1.2fr] md:p-8">
+    <section id="top" className="section-shell pt-4 sm:pt-10">
+      <div className="overflow-hidden rounded-lg border border-line bg-white p-5 shadow-soft sm:p-8 lg:p-10">
+        <div className="grid items-center gap-6 md:grid-cols-[1.05fr_0.95fr]">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-plum">Try the reasoning engine</p>
-            <h2 className="serif mt-4 text-4xl font-semibold leading-tight text-ink">
-              Bring STRATIQ a situation where judgement matters.
-            </h2>
-            <div className="mt-6 grid gap-3">
-              {examples.map((example) => (
-                <button
-                  key={example}
-                  type="button"
-                  onClick={() => setSituation(example)}
-                  className="focus-ring rounded-md border border-line bg-panel p-4 text-left text-sm leading-6 text-muted transition hover:border-gold hover:bg-white"
-                >
-                  {example}
-                </button>
-              ))}
+            <h1 className="mobile-title serif max-w-full text-[2rem] font-semibold leading-[1.02] tracking-normal text-ink min-[390px]:text-[2.2rem] sm:max-w-3xl sm:text-6xl lg:text-[4.35rem]">Communication clarity for frontline leaders.</h1>
+            <p className="mt-4 max-w-xl text-base leading-7 text-[#5f5669] sm:mt-5 sm:text-lg sm:leading-8">Stop overexplaining. Lead with calm authority.</p>
+            <div className="mt-6 grid gap-3 sm:mt-8 sm:flex sm:flex-row">
+              <a href="#free-guide" className="focus-ring inline-flex min-h-12 items-center justify-center gap-3 rounded-md bg-plum px-7 text-sm font-bold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-[#3d185e]">Start Here <ArrowRight /></a>
+              <a href="#clarity-tool" className="focus-ring inline-flex min-h-12 items-center justify-center gap-3 rounded-md border border-gold px-7 text-sm font-bold text-plum transition hover:-translate-y-0.5 hover:bg-gold/10">Use The Clarity Tool <ArrowRight /></a>
+            </div>
+            <div className="mt-6 grid gap-4 border-t border-line pt-5 sm:mt-8 sm:grid-cols-3">{[["Lead under pressure", "Stay clear when the room is not calm."], ["Say what matters", "Remove the extra words that weaken authority."], ["Build trust", "Set standards people can understand and follow."]].map(([title, text]) => <div key={title}><p className="text-sm font-bold text-ink">{title}</p><p className="mt-2 text-sm leading-6 text-[#706778]">{text}</p></div>)}</div>
+          </div>
+          <div className="md:block">
+            <div className="rounded-lg border border-line bg-[#fbfafc] p-3 shadow-soft sm:p-4">
+              <div className="grid grid-cols-[44px_1fr] overflow-hidden rounded-md border border-line bg-white sm:grid-cols-[56px_1fr]">
+                <div className="flex flex-col items-center gap-6 bg-plum py-5 text-white"><Shield className="h-5 w-5 text-gold" /><span className="h-px w-6 bg-white/30" /><Message className="h-4 w-4" /><Target className="h-4 w-4" /></div>
+                <div className="p-4 sm:p-5"><p className="text-[11px] font-bold uppercase tracking-[0.18em] text-plum sm:text-xs sm:tracking-[0.24em]">Clarity Command Centre</p><div className="mt-4 space-y-2">{[["Situation", "Understand the facts."], ["Intention", "Define the outcome."], ["Rewrite", "Remove what weakens authority."], ["Delivery", "Calm. Clear. Controlled."]].map(([label, text]) => <div key={label} className="rounded-md border border-line bg-white p-3 shadow-edge"><p className="text-sm font-bold text-ink">{label}</p><p className="mt-1 text-sm leading-6 text-[#746a7f]">{text}</p></div>)}</div></div>
+              </div>
             </div>
           </div>
-
-          <form onSubmit={analyse} className="grid gap-4">
-            <label className="grid gap-2">
-              <span className="text-sm font-bold text-ink">Situation</span>
-              <textarea
-                value={situation}
-                onChange={(event) => setSituation(event.target.value)}
-                rows={10}
-                placeholder="Describe the decision, conflict, pressure point, risk, or conversation you need to think through."
-                className="focus-ring min-h-56 resize-y rounded-md border border-line bg-white p-4 leading-7 text-ink shadow-edge"
-              />
-            </label>
-            <button
-              type="submit"
-              disabled={loading}
-              className="focus-ring min-h-12 rounded-md bg-plum px-6 text-sm font-bold text-white transition hover:bg-[#3d185e] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading ? "Analysing..." : "Analyse with STRATIQ"}
-            </button>
-            {error ? <p className="rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</p> : null}
-            {result ? (
-              <section className="rounded-md border border-line bg-panel p-5">
-                <h3 className="text-lg font-bold text-ink">STRATIQ brief</h3>
-                <pre className="mt-4 whitespace-pre-wrap font-sans text-sm leading-7 text-muted">{result}</pre>
-              </section>
-            ) : null}
-          </form>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="support" className="section-shell pb-16">
-        <div className="rounded-lg border border-line bg-[linear-gradient(135deg,#ffffff,#f8f6fb)] p-7 shadow-soft md:p-10">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-plum">Free to use</p>
-          <h2 className="serif mt-4 text-4xl font-semibold text-ink">No pricing. No performance theatre.</h2>
-          <p className="mt-4 max-w-2xl leading-8 text-muted">
-            STRATIQ is designed as a practical reasoning tool. It helps you slow the decision down, see the risks, and communicate the next move with clarity.
-          </p>
-        </div>
-      </section>
+    <section id="about" className="section-shell py-12 sm:py-20"><div className="grid gap-7 lg:grid-cols-[0.9fr_1.1fr]"><div><p className="text-xs font-bold uppercase tracking-[0.22em] text-plum">About LeadWithNadine</p><h2 className="serif mt-4 max-w-md text-[2.35rem] font-semibold leading-[1.02] text-ink sm:text-5xl">A communication platform built from real pressure.</h2><div className="mt-5 h-0.5 w-12 bg-gold" /></div><div><p className="max-w-2xl text-lg leading-8 text-ink sm:text-xl sm:leading-9">LeadWithNadine combines Nadine Pierre's operational leadership experience with practical clarity tools for clearer workplace communication.</p><p className="mt-4 max-w-2xl text-sm leading-7 text-[#5f5669] sm:text-base sm:leading-8">The work is grounded in real environments: former Police Officer with 12+ years service, current Security Supervisor / Security Manager on Duty, and day-to-day experience where pressure, standards, and emotional control are not theory.</p></div></div><div className="mt-8 grid gap-3 md:grid-cols-3">{proof.map(([title, text], index) => <article key={title} className="rounded-lg border border-line bg-white p-5 shadow-edge sm:p-6"><div className="mb-5 grid h-11 w-11 place-items-center rounded-full border border-plum/25 text-plum">{index === 0 ? <Shield /> : index === 1 ? <Target /> : <Message />}</div><h3 className="text-lg font-bold text-ink">{title}</h3><p className="mt-3 text-sm leading-7 text-[#665d70]">{text}</p></article>)}</div></section>
 
-      <footer className="border-t border-line bg-white">
-        <div className="section-shell flex flex-col justify-between gap-4 py-7 text-sm text-muted md:flex-row">
-          <p className="font-bold text-plum">STRATIQ</p>
-          <p>Free AI reasoning for better judgement.</p>
-          <p>&copy; {new Date().getFullYear()} STRATIQ.</p>
-        </div>
-      </footer>
-    </main>
-  );
+    <section aria-labelledby="platform-heading" className="section-shell pb-12 sm:pb-20"><div className="grid gap-4 lg:grid-cols-[0.82fr_1.18fr]"><div className="rounded-lg border border-line bg-[#fbfafc] p-5 shadow-edge sm:p-8"><p className="text-xs font-bold uppercase tracking-[0.22em] text-plum">Communication Intelligence</p><h2 id="platform-heading" className="serif mt-4 text-[2.2rem] font-semibold leading-[1.02] text-ink sm:text-5xl">Practical clarity for the moments leaders usually overexplain.</h2><p className="mt-5 text-sm leading-7 text-[#665d70] sm:text-base sm:leading-8">A focused communication system for managers, security professionals, and team leaders who need their message to land clearly.</p></div><div className="grid gap-3 md:grid-cols-3">{pillars.map(([title, text], index) => <article key={title} className="rounded-lg border border-line bg-white p-5 shadow-edge"><div className="mb-5 grid h-11 w-11 place-items-center rounded-full bg-plum/10 text-plum">{index === 0 ? <Frame /> : index === 1 ? <Scale /> : <Pattern />}</div><h3 className="text-lg font-bold leading-snug text-ink">{title}</h3><p className="mt-3 text-sm leading-7 text-[#665d70]">{text}</p></article>)}</div></div></section>
+
+    <section id="clarity-tool" className="section-shell pb-12 sm:pb-20"><div className="rounded-lg border border-line bg-white p-4 shadow-soft sm:p-8 lg:p-10"><div className="mx-auto mb-6 max-w-2xl text-center sm:mb-8"><p className="text-xs font-bold uppercase tracking-[0.22em] text-plum">Stop Overexplaining Tool</p><h2 className="serif mt-4 text-[2.2rem] font-semibold leading-[1.02] text-ink sm:text-5xl">Rewrite the message before you send it.</h2><p className="mt-3 text-sm leading-7 text-[#665d70] sm:text-base sm:leading-8">Paste the message you are softening, stretching, defending, or overexplaining. LeadWithNadine refines it into clearer, calmer, more authoritative communication.</p></div><ClarityTool /></div></section>
+
+    <section id="free-guide" className="section-shell pb-12 sm:pb-20"><div className="grid overflow-hidden rounded-lg border border-line bg-white shadow-soft xl:grid-cols-[0.95fr_0.72fr_0.86fr]"><div className="bg-[linear-gradient(135deg,#201432,#4B1F6F)] p-6 text-white sm:p-10 lg:p-12"><p className="text-xs font-bold uppercase tracking-[0.22em] text-gold">Free Guide</p><h2 className="serif mt-4 max-w-[12ch] text-[2.35rem] font-semibold leading-[1.02] sm:max-w-xl sm:text-5xl">Free Guide: Stop Overexplaining</h2><p className="mt-5 max-w-lg text-sm leading-7 text-white/82 sm:text-base sm:leading-8">A practical entry point into the LeadWithNadine communication system: remove unnecessary explanation, handle difficult conversations, and speak with calm authority.</p></div><div className="grid place-items-center bg-[#f7f5fa] p-6 sm:p-8"><div className="w-full max-w-[230px] rounded-lg border border-white/80 bg-white p-3 shadow-soft sm:max-w-[280px]"><ProtectedGuideImage /></div></div><div className="grid place-items-center p-6 sm:p-10"><ConvertKitEmbed /></div></div></section>
+
+    <section id="insights" className="section-shell pb-12 sm:pb-20"><div className="mb-6 sm:mb-8"><p className="text-xs font-bold uppercase tracking-[0.22em] text-plum">Thought Leadership</p><h2 className="serif mt-4 text-[2.25rem] font-semibold leading-[1.02] text-ink sm:text-5xl">Insights that sharpen how you lead.</h2></div><div className="grid gap-3 md:grid-cols-3">{insights.map(([title, text], index) => <article key={title} className="rounded-lg border border-line bg-white p-5 shadow-edge sm:p-6"><div className="mb-6 grid h-12 w-12 place-items-center rounded-full bg-plum/10 text-plum">{index === 0 ? <Target /> : index === 1 ? <Shield /> : <Message />}</div><h3 className="text-xl font-bold leading-snug text-ink">{title}</h3><p className="mt-3 text-sm leading-7 text-[#665d70]">{text}</p></article>)}</div></section>
+
+    <section aria-labelledby="ecosystem-heading" className="section-shell pb-12 sm:pb-20"><div className="rounded-lg border border-line bg-[linear-gradient(135deg,#ffffff,#f8f6fb)] p-5 shadow-soft sm:p-8 lg:p-10"><div className="grid gap-7 lg:grid-cols-[0.88fr_1.12fr]"><div><p className="text-xs font-bold uppercase tracking-[0.22em] text-plum">LeadWithNadine Ecosystem</p><h2 id="ecosystem-heading" className="serif mt-4 text-[2.25rem] font-semibold leading-[1.02] text-ink sm:text-5xl">One brand. Clearer communication across every channel.</h2></div><div className="grid gap-3 sm:grid-cols-3">{ecosystem.map(([title, text], index) => <article key={title} className="rounded-lg border border-line bg-white p-5 shadow-edge"><div className="mb-4 text-plum">{index === 0 ? <Message /> : index === 1 ? <Compass /> : <Target />}</div><h3 className="text-base font-bold text-ink">{title}</h3><p className="mt-2 text-sm leading-6 text-[#665d70]">{text}</p></article>)}</div></div></div></section>
+
+    <footer id="footer" className="border-t border-line bg-white"><div className="section-shell grid gap-8 py-9 md:grid-cols-[1.1fr_0.8fr_0.8fr_1fr]"><div><div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-md border border-gold/70 text-plum"><Shield className="h-5 w-5" /></span><span className="serif text-3xl font-semibold text-plum">LeadWithNadine</span></div><p className="mt-4 max-w-xs text-sm leading-7 text-[#665d70]">Communication clarity for frontline leaders. Stop overexplaining. Lead with calm authority.</p></div><div><h3 className="text-sm font-bold uppercase tracking-[0.18em] text-plum">Links</h3><div className="mt-4 grid gap-2 text-sm text-[#5f5669]"><a href="https://www.linkedin.com/" className="hover:text-plum">LinkedIn</a><a href="https://www.youtube.com/" className="hover:text-plum">YouTube</a><a href={bookUrl} target="_blank" rel="noreferrer" className="hover:text-plum">Read the book</a><a href={donateUrl} target="_blank" rel="noreferrer" className="hover:text-plum">Donate</a></div></div><div><h3 className="text-sm font-bold uppercase tracking-[0.18em] text-plum">Explore</h3><div className="mt-4 grid gap-2 text-sm text-[#5f5669]">{navItems.slice(0, 4).map(([label, href]) => <a key={label} href={href} className="hover:text-plum">{label}</a>)}</div></div><div><h3 className="text-sm font-bold uppercase tracking-[0.18em] text-plum">Stay Connected</h3><p className="mt-4 text-sm leading-7 text-[#665d70]">Practical insight to help you lead with clarity and confidence.</p><a href="#free-guide" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-plum">Email signup <ArrowRight /></a></div></div><div className="section-shell border-t border-line py-5 text-xs text-[#746a7f]">&copy; {new Date().getFullYear()} LeadWithNadine. All rights reserved.</div></footer>
+  </main>;
 }

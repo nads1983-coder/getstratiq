@@ -1,13 +1,14 @@
 {
-  "name": "getstratiq",
+  "name": "lead-with-nadine",
   "version": "1.0.0",
   "private": true,
-  "description": "STRATIQ free AI strategic reasoning tool.",
+  "description": "LeadWithNadine communication clarity platform.",
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "setup-env": "node scripts/setup-env.mjs"
   },
   "dependencies": {
     "next": "^16.2.6",

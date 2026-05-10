@@ -1,24 +1,21 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}"],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        ink: "#19151F",
-        muted: "#625A6B",
+        ink: "#17111f",
         plum: "#4B1F6F",
         gold: "#D4AF37",
-        line: "#E9E5EE",
-        panel: "#FAF8FC"
+        line: "#e5e0ea",
       },
       boxShadow: {
-        soft: "0 24px 70px rgba(33, 20, 47, 0.10)",
-        edge: "0 1px 0 rgba(25, 21, 31, 0.06)"
-      }
-    }
+        soft: "0 22px 70px rgba(31, 20, 45, 0.10)",
+        edge: "0 1px 0 rgba(23,17,31,0.05)",
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };
-
 export default config;
