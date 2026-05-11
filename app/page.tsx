@@ -10,7 +10,55 @@ const prompts = [
   "A stakeholder is pushing for speed, but I can see operational risk that has not been acknowledged."
 ];
 
-const navItems = ["Analyse", "Risk", "Options", "Wording"];
+const navItems = ["Analysis", "Risk", "Options", "Wording"];
+
+const productModes = [
+  {
+    title: "Analysis",
+    icon: "analyse" as IconName,
+    summary:
+      "Break down what is actually happening, separate facts from assumptions, and identify what matters most before you act.",
+    steps: [
+      "Clarify the decision you are trying to make",
+      "Identify what you know versus what you are assuming",
+      "Remove noise from the situation"
+    ]
+  },
+  {
+    title: "Risk",
+    icon: "risk" as IconName,
+    summary:
+      "Identify what could go wrong, what is uncertain, and where you may be moving too quickly.",
+    steps: [
+      "Look for missing information",
+      "Check whether urgency is genuine",
+      "Consider the likely outcome if nothing changes"
+    ]
+  },
+  {
+    title: "Options",
+    icon: "options" as IconName,
+    summary:
+      "Pressure-test your possible next moves and understand which option gives you the most clarity, control, and flexibility.",
+    steps: [
+      "Compare the safest move against the fastest move",
+      "Avoid deciding from pressure alone",
+      "Choose the option that preserves clarity and control"
+    ]
+  },
+  {
+    title: "Wording",
+    icon: "wording" as IconName,
+    summary:
+      "Turn your next move into clear, calm, usable wording so you can communicate without overexplaining.",
+    steps: [
+      "Keep the message short",
+      "Ask for the missing information directly",
+      "Avoid emotional or defensive wording"
+    ]
+  }
+];
+
 const expectedSections = [
   "Situation summary",
   "Strategic interpretation",
@@ -111,6 +159,7 @@ function parseBrief(text: string): BriefSection[] {
 
 function navIconName(item: string): IconName {
   if (item === "Risk") return "risk";
+  if (item === "Analysis") return "analyse";
   if (item === "Options") return "options";
   if (item === "Wording") return "wording";
   return "analyse";
@@ -121,9 +170,11 @@ export default function Home() {
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [activeMode, setActiveMode] = useState(productModes[0].title);
 
   const sections = useMemo(() => parseBrief(result), [result]);
   const characterCount = situation.trim().length;
+  const activeModeDetails = productModes.find((mode) => mode.title === activeMode) || productModes[0];
 
   async function analyse(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -200,7 +251,7 @@ export default function Home() {
 
         <nav className="side-nav" aria-label="Primary">
           {navItems.map((item) => (
-            <a key={item} href="#workspace" className={item === "Analyse" ? "active" : ""}>
+            <a key={item} href="#workspace" className={item === activeMode ? "active" : ""}>
               <Icon name={navIconName(item)} />
               {item}
             </a>
@@ -248,6 +299,44 @@ export default function Home() {
             <p className="tool-intro">
               Enter a situation, decision, risk, or difficult message. STRATIQ returns a structured brief built around judgement, trade-offs, and next action.
             </p>
+
+
+            <section className="mode-panel" aria-labelledby="mode-title">
+              <div className="mode-heading">
+                <div>
+                  <p className="eyebrow">Reasoning modes</p>
+                  <h2 id="mode-title">Choose the lens STRATIQ should sharpen.</h2>
+                </div>
+                <span>{activeModeDetails.title}</span>
+              </div>
+
+              <div className="mode-grid" role="tablist" aria-label="STRATIQ reasoning sections">
+                {productModes.map((mode) => (
+                  <button
+                    key={mode.title}
+                    type="button"
+                    role="tab"
+                    aria-selected={activeMode === mode.title}
+                    aria-controls="mode-detail"
+                    className={activeMode === mode.title ? "mode-card active" : "mode-card"}
+                    onClick={() => setActiveMode(mode.title)}
+                  >
+                    <Icon name={mode.icon} />
+                    <span>{mode.title}</span>
+                  </button>
+                ))}
+              </div>
+
+              <article id="mode-detail" className="mode-detail" role="tabpanel">
+                <h3>{activeModeDetails.title}</h3>
+                <p>{activeModeDetails.summary}</p>
+                <ul>
+                  {activeModeDetails.steps.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ul>
+              </article>
+            </section>
 
             <form onSubmit={analyse} className="analysis-form">
               <label className="input-label" htmlFor="situation">
