@@ -76,7 +76,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en-GB">
       <head>
         {/* Privacy-friendly analytics by Plausible */}
-        <script async src="https://plausible.io/js/pa-EOhrmj_IA3OYx_GKLAeFY.js"></script>
+        <script async src="https://plausible.io/js/pa-ip8Ajlgt7zt_6ukItyoRc.js"></script>
         <script
           dangerouslySetInnerHTML={{
             __html:
