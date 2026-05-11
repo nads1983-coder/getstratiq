@@ -1,5 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="STRATIQ S shield logo">
-  <rect width="512" height="512" rx="88" fill="#ffffff"/>
-  <rect x="44" y="44" width="424" height="424" rx="72" fill="#ffffff" stroke="#D4AF37" stroke-width="24"/>
-  <text x="256" y="327" text-anchor="middle" fill="#4B1F6F" font-family="Inter, Arial, sans-serif" font-size="230" font-weight="900">S</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="STRATIQ S logo">
+  <defs>
+    <linearGradient id="outer" x1="68" y1="40" x2="444" y2="472" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#30263B"/>
+      <stop offset="1" stop-color="#17111F"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="156" y1="128" x2="356" y2="384" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8D43C1"/>
+      <stop offset="0.52" stop-color="#5B2484"/>
+      <stop offset="1" stop-color="#4B1F6F"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="#17111F"/>
+  <rect x="26" y="26" width="460" height="460" rx="102" fill="url(#outer)" stroke="#D4AF37" stroke-opacity="0.34" stroke-width="10"/>
+  <rect x="142" y="120" width="228" height="228" rx="58" fill="url(#inner)" stroke="#D4AF37" stroke-opacity="0.62" stroke-width="8"/>
+  <text x="256" y="293" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="142" font-weight="900">S</text>
 </svg>
