@@ -422,6 +422,7 @@ h1 { margin: 0; max-width: 780px; font-size: clamp(2.3rem, 5vw, 5.4rem); line-he
 .insight-rail p { margin: 8px 0 0; color: var(--muted); line-height: 1.6; font-size: 0.9rem; }
 .app-footer { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 18px; border-radius: 16px; padding: 14px 18px; color: var(--muted); font-size: 0.9rem; }
 .app-footer a { color: var(--gold); font-weight: 900; }
+.app-footer .support-email { color: var(--soft); font-weight: 800; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes shimmer { to { transform: translateX(100%); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; } }

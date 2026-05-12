@@ -586,6 +586,9 @@ export default function Home() {
 
         <footer className="app-footer">
           <span>STRATIQ remains free to use.</span>
+          <a href="mailto:support@getstratiq.co" className="support-email">
+            Support: support@getstratiq.co
+          </a>
           <a href={donationUrl} target="_blank" rel="noreferrer">
             Support STRATIQ
           </a>
