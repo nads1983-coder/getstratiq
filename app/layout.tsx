@@ -35,10 +35,11 @@ export const metadata: Metadata = {
     locale: "en_GB",
     images: [
       {
-        url: "/og-image.svg",
+        url: "https://getstratiq.co/og-image.png",
         width: 1200,
         height: 630,
-        alt: "STRATIQ free AI strategic reasoning tool"
+        alt: "STRATIQ strategic reasoning for difficult decisions",
+        type: "image/png"
       }
     ]
   },
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     title: "STRATIQ | Free AI Strategic Reasoning Tool",
     description:
       "Analyse decisions, risks, options, trade-offs, and communication with calm strategic clarity.",
-    images: ["/og-image.svg"]
+    images: ["https://getstratiq.co/og-image.png"]
   },
   icons: {
     icon: [
