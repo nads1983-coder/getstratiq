@@ -37,6 +37,33 @@ const stratiqMethod = [
   }
 ];
 
+const testimonials = [
+  {
+    quote:
+      "STRATIQ helped me identify operational risks I had not separated from the emotional noise of the situation.",
+    name: "Amelia",
+    role: "Operations Director",
+    indicator: "Risk visibility",
+    context: "Multi-site operations"
+  },
+  {
+    quote:
+      "The structured analysis feels closer to a strategic adviser than a generic AI tool. It made the trade-offs much clearer.",
+    name: "Marcus",
+    role: "Founder",
+    indicator: "Executive reasoning",
+    context: "Founder decisions"
+  },
+  {
+    quote:
+      "The wording and risk framing helped me handle a difficult stakeholder conversation without overexplaining or escalating it.",
+    name: "Priya",
+    role: "Product Manager",
+    indicator: "Communication structure",
+    context: "Stakeholder planning"
+  }
+];
+
 const productModes = [
   {
     title: "Analysis",
@@ -750,6 +777,41 @@ export default function Home() {
             <h2>Choose the move</h2>
             <p>Compare routes and leave with one immediate professional next step.</p>
           </article>
+        </section>
+
+        <section className="testimonial-section" aria-labelledby="testimonial-title">
+          <div className="testimonial-heading">
+            <div>
+              <p className="eyebrow">Reviews</p>
+              <h2 id="testimonial-title">Trusted for clearer judgement under pressure.</h2>
+            </div>
+            <p>Designed for professionals making difficult decisions where risk, communication, and timing matter.</p>
+          </div>
+
+          <div className="trust-chips" aria-label="STRATIQ trust indicators">
+            <span>Strategic clarity</span>
+            <span>Risk visibility</span>
+            <span>Communication structure</span>
+          </div>
+
+          <div className="testimonial-grid">
+            {testimonials.map((testimonial) => (
+              <article key={`${testimonial.name}-${testimonial.role}`} className="testimonial-card">
+                <div className="quote-mark" aria-hidden="true">
+                  “
+                </div>
+                <p>{testimonial.quote}</p>
+                <div className="testimonial-meta">
+                  <strong>{testimonial.name}</strong>
+                  <span>{testimonial.role}</span>
+                </div>
+                <div className="testimonial-context">
+                  <span>{testimonial.indicator}</span>
+                  <span>{testimonial.context}</span>
+                </div>
+              </article>
+            ))}
+          </div>
         </section>
 
         <footer className="app-footer">
