@@ -1,3 +1,8 @@
+"use client";
+
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { trackEvent } from "./analytics";
+
 
 const donationUrl = "https://donate.stripe.com/5kQ3cvb6sc5E2Rv2IigA801";
 
