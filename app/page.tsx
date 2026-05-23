@@ -493,9 +493,12 @@ export default function Home() {
           {navItems.map((item) => (
             <a
               key={item}
-              href="#workspace"
+              href="#mode-detail"
               className={item === activeMode ? "active" : ""}
-              onClick={() => trackEvent("Mode Selected", { mode_name: item })}
+              onClick={() => {
+                setActiveMode(item);
+                trackEvent("Mode Selected", { mode_name: item });
+              }}
             >
               <Icon name={navIconName(item)} />
               {item}
