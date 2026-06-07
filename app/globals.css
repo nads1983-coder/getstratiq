@@ -672,6 +672,54 @@ h1 { margin: 0; max-width: 780px; font-size: clamp(2.3rem, 5vw, 5.4rem); line-he
   padding-left: 24px;
 }
 
+.article-meta,
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: -14px 0 32px;
+}
+
+.article-meta span,
+.article-tags span {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(247, 241, 255, 0.62);
+  padding: 8px 11px;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.article-tags {
+  margin-top: -18px;
+}
+
+.article-tags span {
+  border-color: rgba(212, 175, 55, 0.24);
+  background: rgba(212, 175, 55, 0.08);
+  color: #d4af37;
+}
+
+.article-cta {
+  margin-top: 48px;
+  padding: 26px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(212, 175, 55, 0.1), rgba(75, 31, 111, 0.16));
+}
+
+.article-cta h2 {
+  margin-top: 0;
+}
+
+.article-cta a {
+  display: inline-flex;
+  margin-top: 10px;
+  color: #d4af37;
+  font-weight: 900;
+}
+
 .eyebrow {
   margin-bottom: 14px;
   color: #d4af37 !important;

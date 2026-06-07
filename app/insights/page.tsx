@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getAllInsights } from "../../lib/insights";
 
 export const metadata = {
   title: "Insights | GetStratiq",
@@ -6,6 +7,8 @@ export const metadata = {
 };
 
 export default function InsightsPage() {
+  const articles = getAllInsights();
+
   return (
     <main className="article-page">
       <section className="article-container">
@@ -16,15 +19,15 @@ export default function InsightsPage() {
         </p>
 
         <div className="insight-list">
-          <Link href="/insights/why-most-businesses-have-a-growth-problem-not-a-marketing-problem">
-            <article className="insight-card">
-              <p className="eyebrow">Strategic Growth</p>
-              <h2>Why Most Businesses Have a Growth Problem, Not a Marketing Problem</h2>
-              <p>
-                Most businesses blame marketing when growth slows. In reality, the problem is often strategy, positioning and execution.
-              </p>
-            </article>
-          </Link>
+          {articles.map((article) => (
+            <Link key={article.slug} href={`/insights/${article.slug}`}>
+              <article className="insight-card">
+                <p className="eyebrow">{article.articleType}</p>
+                <h2>{article.title}</h2>
+                <p>{article.excerpt}</p>
+              </article>
+            </Link>
+          ))}
         </div>
       </section>
     </main>
